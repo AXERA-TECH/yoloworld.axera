@@ -58,6 +58,9 @@ _lib.yw_destroy.restype = ctypes.c_int
 _lib.yw_set_classes.argtypes = [ctypes.c_void_p, ctypes.POINTER(YWClasses)]
 _lib.yw_set_classes.restype = ctypes.c_int
 
+_lib.yw_set_threshold.argtypes = [ctypes.c_void_p, ctypes.c_float]
+_lib.yw_set_threshold.restype = ctypes.c_int
+
 _lib.yw_detect.argtypes = [ctypes.c_void_p, ctypes.POINTER(YWImage), ctypes.POINTER(YWObjects)]
 _lib.yw_detect.restype = ctypes.c_int
 
@@ -102,6 +105,9 @@ class YOLOWORLD:
                 yw_classes.classes[i][j] = name_bytes[j]
 
         check_error(_lib.yw_set_classes(self.handle, ctypes.byref(yw_classes), 0))
+    
+    def set_threshold(self, threshold):
+        check_error(_lib.yw_set_threshold(self.handle, threshold))
     
     def detect(self, image_data: np.ndarray) -> None:
         image = YWImage()

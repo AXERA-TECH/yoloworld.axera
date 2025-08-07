@@ -35,7 +35,7 @@ if __name__ == '__main__':
             'yoloworld_path': args.yoloworld,
         })
         
-        yw.set_classes(['dog','cat','bird','person'])
+        yw.set_classes(["person", "dog", "car", "horse"])
 
         img = cv2.imread(args.image)
         img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
@@ -53,17 +53,6 @@ if __name__ == '__main__':
             cv2.rectangle(img, (x, y), (x + w, y + h), (0, 255, 0), 2)
             cv2.putText(img, f"{class_id}: {conf:.2f}", (x, y - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
         cv2.imwrite('result.jpg', img)
-        # # 添加图像
-        # image_files = glob.glob(os.path.join(image_folder, '*.jpg'))
-        # for image_file in tqdm.tqdm(image_files):
-        #     img = cv2.imread(image_file)
-        #     cv2.cvtColor(img, cv2.COLOR_BGR2RGB, img)
-        #     filename = os.path.basename(image_file)
-        #     clip.add_image(filename, img)
-
-        # # 文本匹配
-        # results = clip.match_text('dog', top_k=10)
-        # print("匹配结果:", results)
 
     finally:
         # 反初始化系统

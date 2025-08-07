@@ -76,6 +76,8 @@ extern "C"
 
     int yw_set_classes(yw_handle_t handle, yw_classes_t *classes);
 
+    int yw_set_threshold(yw_handle_t handle, float threshold);
+
     int yw_detect(yw_handle_t handle, yw_image_t *image, yw_objects_t *objects);
 
 #if defined(__cplusplus)

@@ -28,6 +28,7 @@ struct yw_internal_handle_t
     float m_threshold;
     int num_classes;
     int num_features;
+    bool is_output_nhwc = true;
 
     CLIPTextEncoderAX650 m_text_encoder;
 };
@@ -413,6 +414,12 @@ int yw_create(yw_init_t *init_info, yw_handle_t *_handle)
         return yw_errcode_create_failed_tenc;
     }
 
+        for (int i = 0; i < 3; ++i)
+    {
+        handle->is_output_nhwc &= handle->m_yoloworkd->get_output(i + 1).vShape[3] == (4 * 16 + handle->num_classes);
+    }
+    printf("is_output_nhwc: %d\n", handle->is_output_nhwc);
+
     auto ret = handle->m_text_encoder.load_text_encoder(init_info);
     if (!ret)
     {
@@ -469,6 +476,17 @@ int yw_set_classes(yw_handle_t handle, yw_classes_t *classes)
     return 0;
 }
 
+int yw_set_threshold(yw_handle_t handle, float threshold)
+{
+    yw_internal_handle_t *internal_handle = (yw_internal_handle_t *)handle;
+    if (internal_handle == nullptr)
+    {
+        return yw_errcode_invalid_ptr;
+    }
+    internal_handle->m_threshold = threshold;
+    return 0;
+}
+
 int yw_detect(yw_handle_t handle, yw_image_t *image, yw_objects_t *objects)
 {
     yw_internal_handle_t *internal_handle = (yw_internal_handle_t *)handle;
@@ -509,7 +527,10 @@ int yw_detect(yw_handle_t handle, yw_image_t *image, yw_objects_t *objects)
     {
         auto feat_ptr = (float *)internal_handle->m_yoloworkd->get_output(i + 1).pVirAddr;
         int32_t stride = (1 << i) * 8;
-        generate_proposals_yolov8_nhwc(stride, feat_ptr, internal_handle->m_threshold, proposals, internal_handle->m_input_w, internal_handle->m_input_h, internal_handle->num_classes);
+        if(internal_handle->is_output_nhwc)
+            generate_proposals_yolov8_nhwc(stride, feat_ptr, internal_handle->m_threshold, proposals, internal_handle->m_input_w, internal_handle->m_input_h, internal_handle->num_classes);
+        else
+            generate_proposals_yolov8_nchw(stride, feat_ptr, internal_handle->m_threshold, proposals, internal_handle->m_input_w, internal_handle->m_input_h, internal_handle->num_classes);
     }
     std::vector<Object> objects_vec;
     get_out_bbox(proposals, objects_vec, 0.45, internal_handle->m_input_h, internal_handle->m_input_w, cv_image.rows, cv_image.cols);
