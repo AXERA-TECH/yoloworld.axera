@@ -414,9 +414,9 @@ int yw_create(yw_init_t *init_info, yw_handle_t *_handle)
         return yw_errcode_create_failed_tenc;
     }
 
-        for (int i = 0; i < 3; ++i)
+    for (int i = 0; i < 3; ++i)
     {
-        handle->is_output_nhwc &= handle->m_yoloworkd->get_output(i + 1).vShape[3] == (4 * 16 + handle->num_classes);
+        handle->is_output_nhwc &= handle->m_yoloworkd->get_output(i).vShape[3] == (4 * 16 + handle->num_classes);
     }
     printf("is_output_nhwc: %d\n", handle->is_output_nhwc);
 
@@ -525,9 +525,9 @@ int yw_detect(yw_handle_t handle, yw_image_t *image, yw_objects_t *objects)
     std::vector<Object> proposals;
     for (int i = 0; i < 3; ++i)
     {
-        auto feat_ptr = (float *)internal_handle->m_yoloworkd->get_output(i + 1).pVirAddr;
+        auto feat_ptr = (float *)internal_handle->m_yoloworkd->get_output(i).pVirAddr;
         int32_t stride = (1 << i) * 8;
-        if(internal_handle->is_output_nhwc)
+        if (internal_handle->is_output_nhwc)
             generate_proposals_yolov8_nhwc(stride, feat_ptr, internal_handle->m_threshold, proposals, internal_handle->m_input_w, internal_handle->m_input_h, internal_handle->num_classes);
         else
             generate_proposals_yolov8_nchw(stride, feat_ptr, internal_handle->m_threshold, proposals, internal_handle->m_input_w, internal_handle->m_input_h, internal_handle->num_classes);
