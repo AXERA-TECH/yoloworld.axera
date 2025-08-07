@@ -1,3 +1,4 @@
+import colorsys
 import gradio as gr
 import cv2
 from pyaxdev import enum_devices, sys_init, sys_deinit, AxDeviceType
@@ -32,7 +33,19 @@ yw = YOLOWORLD({
             'yoloworld_path': args.yoloworld,
         })
 
-colors = [(random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)) for _ in range(4)]
+def generate_vivid_colors(n):
+    colors = []
+    for i in range(n):
+        # 均匀分布的 hue，饱和度、亮度都设高一点
+        h = i / n
+        s = 0.9 + random.random() * 0.1     # 饱和度 0.9~1.0
+        v = 0.9 + random.random() * 0.1     # 亮度 0.9~1.0
+        r, g, b = colorsys.hsv_to_rgb(h, s, v)
+        colors.append((int(r * 255), int(g * 255), int(b * 255)))
+    return colors
+
+
+colors = generate_vivid_colors(4)
 # ========== 推理函数 ==========
 def detect_image(image, class1, class2, class3, class4, threshold):
     if image is None:
