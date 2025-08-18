@@ -35,10 +35,10 @@ sudo apt install libopencv-dev build-essential
 ---
 ## CI Status
 
-| Architecture | Status |
-|--------------|--------|
-| x86          | ![x86 Build](https://github.com/AXERA-TECH/yoloworld.axera/actions/workflows/build.yml/badge.svg?branch=main&label=x86&job=build-x86) |
-| aarch64      | ![aarch64 Build](https://github.com/AXERA-TECH/yoloworld.axera/actions/workflows/build.yml/badge.svg?branch=main&label=aarch64&job=build-aarch64) |
+| Architecture | Status |Download|
+|--------------|--------|--------|
+| x86          | ![x86 Build](https://github.com/AXERA-TECH/yoloworld.axera/actions/workflows/build.yml/badge.svg?branch=main&label=x86&job=build-x86) |[download](https://nightly.link/AXERA-TECH/yoloworld.axera/workflows/build/main/build-x86.zip) |
+| aarch64      | ![aarch64 Build](https://github.com/AXERA-TECH/yoloworld.axera/actions/workflows/build.yml/badge.svg?branch=main&label=aarch64&job=build-aarch64) |[download](https://nightly.link/AXERA-TECH/yoloworld.axera/workflows/build/main/build-aarch64.zip) |
 
 ---
 ## Performance
