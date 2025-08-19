@@ -24,8 +24,7 @@ int main(int argc, char *argv[])
     }
     else
     {
-        printf("no device available\n");
-        return -1;
+        printf("no axcl device available\n");
     }
 
     yw_init_t init_info;
@@ -72,7 +71,6 @@ int main(int argc, char *argv[])
     }
     else if (ax_devices.devices.count > 0)
     {
-
         ax_dev_sys_deinit(axcl_device, 0);
     }
 
