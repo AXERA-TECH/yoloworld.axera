@@ -54,7 +54,7 @@ sudo apt install libopencv-dev build-essential
 ### Get model
 
 ```bash
-./test_detect_by_text --yoloworld yoloworld/yolo_u16_ax.axmodel --tenc yoloworld/clip_b1_u16.axmodel -v yoloworld/vocab.txt -i ssd_horse.jpg --classes person,car,dog,horse
+./test_detect_by_text --yoloworld yoloworld/yolo_u16_ax650.axmodel --tenc yoloworld/clip_b1_u16_ax650.axmodel -v yoloworld/vocab.txt -i ssd_horse.jpg --classes person,car,dog,horse
 ```
 
 ![](pyyoloworld/result.jpg)
@@ -64,7 +64,7 @@ sudo apt install libopencv-dev build-essential
 ### Web demo(After `make install`)
 ```
 pip install -r requirements.txt
-python gradio_example.py --yoloworld yoloworld/yolo_u16_ax.axmodel --tenc yoloworld/clip_b1_u16.axmodel --vocab yoloworld/vocab.txt
+python gradio_example.py --yoloworld yoloworld/yolo_u16_ax650.axmodel --tenc yoloworld/clip_b1_u16_ax650.axmodel --vocab yoloworld/vocab.txt
 
 * Running on local URL:  http://0.0.0.0:7860
 * To create a public link, set `share=True` in `launch()`.
