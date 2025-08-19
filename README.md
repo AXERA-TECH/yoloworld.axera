@@ -1,5 +1,3 @@
-
-
 # Yolo World SDK for Axera NPU SoCs (AX650N / AX650A / AX8850N / AX8850)
 
 ---
@@ -43,10 +41,14 @@ sudo apt install libopencv-dev build-essential
 ---
 ## Performance
 
+YOLO-Worldv2-L
+
 | Model | Input Shape |  Latency (ms) | CMM Usage (MB) |
 |-------|------------|--------------|------------|
-| yolo_u16_ax.axmodel | 1 x 640 x 640 x 3 |  9.522 ms | 21 MB |
-| clip_b1_u16.axmodel | 1 x 77 |  2.997 ms | 137 MB |
+| yolo_u16_ax650.axmodel | 1 x 640 x 640 x 3 |  9.522 ms | 21 MB |
+| clip_b1_u16_ax650.axmodel | 1 x 77 |  2.997 ms | 137 MB |
+| yolo_u16_ax630c.axmodel | 1 x 640 x 640 x 3 |  43.450 ms | 31 MB |
+| clip_b1_u16_ax630c.axmodel | 1 x 77 |  10.703 ms | 134 MB |
 ---
 
 ## Usage Example
