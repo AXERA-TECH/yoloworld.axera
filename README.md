@@ -8,8 +8,8 @@
 ### x86 Build
 
 ```bash
-git clone --recursive https://github.com/AXERA-TECH/yoloworld.axera.git
-cd libclip.axera
+git clone https://github.com/AXERA-TECH/yoloworld.axera.git
+cd yoloworld.axera
 sudo apt install libopencv-dev build-essential 
 ./build.sh
 ```
@@ -19,16 +19,16 @@ sudo apt install libopencv-dev build-essential
 #### Cross-compile for aarch64
 
 ```bash
-git clone --recursive https://github.com/AXERA-TECH/yoloworld.axera.git
-cd libclip.axera
+git clone https://github.com/AXERA-TECH/yoloworld.axera.git
+cd yoloworld.axera
 ./build_aarch64.sh
 ```
 
 #### Native Build on Target Board
 
 ```bash
-git clone --recursive https://github.com/AXERA-TECH/yoloworld.axera.git
-cd libclip.axera
+git clone https://github.com/AXERA-TECH/yoloworld.axera.git
+cd yoloworld.axera
 sudo apt install libopencv-dev build-essential
 ./build.sh
 ```
